@@ -7,14 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Tasksman</title>
+    <title>Service App</title>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app">
+    </div>
 
     <script src="{{ asset('js/app.js') }}"></script>
-    <div style="color:red; font-size:30px;">Attention attention, Pamela est une dangereuse psychopathe</div>
 </body>
 </html>

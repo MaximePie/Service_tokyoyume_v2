@@ -1,4 +1,11 @@
 
+
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import Header from './components/Header'
+
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes React and other helpers. It's a great starting point while
@@ -14,3 +21,30 @@ require('./bootstrap');
  */
 
 require('./components/Example');
+
+
+
+// resources/assets/js/components/App.js
+
+class App extends Component {
+    render () {
+
+        return (
+            <BrowserRouter>
+                <div>
+                    <Header />
+                </div>
+            </BrowserRouter>
+        )
+
+/*
+        return (
+            <div>
+                HAHA HA HA HA
+            </div>
+        )
+*/
+    }
+}
+
+ReactDOM.render(<App />, document.getElementById('app'))
