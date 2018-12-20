@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Header from './components/Header'
 import CommandPage from './components/Command'
+import Sandwiches from './components/Sandwich'
 
 
 /**
@@ -28,13 +29,40 @@ require('./components/Example');
 // resources/assets/js/components/App.js
 
 class App extends Component {
+
+    constructor(){
+        super();
+        this.switch_menu_item = this.switch_menu_item.bind(this)
+        this.state = {
+            next_component: <CommandPage/>
+        }
+    }
+
+    switch_menu_item(next_menu) {
+
+        let next_component = undefined;
+
+        if(next_menu == "commandes") {
+            next_component = <CommandPage/>
+        }
+        else if (next_menu == "sandwiches") {
+            next_component = <Sandwiches/>
+        }
+
+        this.setState({
+            next_component
+        })
+    }
+
     render () {
 
         return (
             <BrowserRouter>
                 <div>
-                    <Header />
-                    <CommandPage/>
+                    <Header switch_menu_item = {this.switch_menu_item} />
+                    <div className = "main-container">
+                        {this.state.next_component}
+                    </div>
                 </div>
             </BrowserRouter>
         )

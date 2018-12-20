@@ -9528,3 +9528,15 @@ a.text-dark:focus {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
+.headbar__menu-item:hover {
+  cursor: pointer;
+}
+
+.main-container {
+  border: solid 1px #e6e6e6;
+  margin: 16px 0;
+  padding: 16px;
+  /* min-height: 90vh; */
+  height: 90vh;
+}
+
