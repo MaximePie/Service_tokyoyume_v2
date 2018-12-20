@@ -63608,13 +63608,15 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.createSandwich
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Nom de sandwich : "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "sandwich_name_input",
         onChange: this.on_change_sandwich_name,
         type: "text"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         value: "Ajouter un sandwich de l'ambiance"
       })))));
-    }
+    } //RELATED TO THE CLASS METHODS
+
   }, {
     key: "on_change_sandwich_name",
     value: function on_change_sandwich_name(event) {
@@ -63646,6 +63648,8 @@ function (_React$Component) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/sandwiches', sandwich).then(function (response) {
         // redirect to the homepage
         _this4.fetch_sandwiches();
+
+        _this4.reset_text_field("sandwich_name_input");
       }).catch(function (error) {
         _this4.setState({
           errors: error.response.data.errors
@@ -63685,6 +63689,17 @@ function (_React$Component) {
           errors: error.response.data.errors
         });
       });
+    } //Not related to class methods (no need to bind them)
+
+  }, {
+    key: "reset_text_field",
+    value: function reset_text_field(field_id) {
+      var field = document.getElementById(field_id);
+      field.innerText = "";
+      field.value = "";
+      field.focus();
+      field.setAttribute("value", "");
+      console.log(field.value);
     }
   }]);
 

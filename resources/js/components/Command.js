@@ -41,7 +41,8 @@ class CommandPage extends React.Component {
                     </div>
                     <div className="command-page__add-sandwich">
                         <form onSubmit={this.createSandwich} >
-                            <label>Nom de sandwich : </label><input onChange={this.on_change_sandwich_name} type="text"></input>
+                            <label>Nom de sandwich : </label>
+                            <input id="sandwich_name_input" onChange={this.on_change_sandwich_name} type="text"></input>
                             <input type = "submit" value = "Ajouter un sandwich de l'ambiance"/>
                         </form>
                     </div>
@@ -51,7 +52,7 @@ class CommandPage extends React.Component {
     }
 
 
-
+    //RELATED TO THE CLASS METHODS
     on_change_sandwich_name (event) {
         let sandwich_name = event.target.value;
         this.setState({
@@ -78,6 +79,7 @@ class CommandPage extends React.Component {
             .then(response => {
                 // redirect to the homepage
                 this.fetch_sandwiches();
+                this.reset_text_field("sandwich_name_input");
             })
             .catch(error => {
                 this.setState({
@@ -119,6 +121,16 @@ class CommandPage extends React.Component {
                 })
             })
     }
+
+
+    //Not related to class methods (no need to bind them)
+    reset_text_field(field_id){
+        var field = document.getElementById(field_id);
+        field.value = "";
+        console.log(field.value);
+    }
 }
+
+
 
 export default CommandPage
