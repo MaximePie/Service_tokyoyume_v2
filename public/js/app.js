@@ -63393,7 +63393,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Header */ "./resources/js/components/Header.js");
 /* harmony import */ var _components_Command__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Command */ "./resources/js/components/Command.js");
-/* harmony import */ var _components_Sandwich__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Sandwich */ "./resources/js/components/Sandwich.js");
+/* harmony import */ var _components_Sandwiches_Sandwich__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Sandwiches/Sandwich */ "./resources/js/components/Sandwiches/Sandwich.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -63461,7 +63461,7 @@ function (_Component) {
       if (next_menu == "commandes") {
         next_component = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Command__WEBPACK_IMPORTED_MODULE_4__["default"], null);
       } else if (next_menu == "sandwiches") {
-        next_component = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Sandwich__WEBPACK_IMPORTED_MODULE_5__["default"], null);
+        next_component = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Sandwiches_Sandwich__WEBPACK_IMPORTED_MODULE_5__["default"], null);
       }
 
       this.setState({
@@ -63603,7 +63603,6 @@ function (_React$Component) {
       sandwich_name: ""
     };
     _this.on_change_sandwich_name = _this.on_change_sandwich_name.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.createSandwich = _this.createSandwich.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.get_sandwiches = _this.get_sandwiches.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.delete_sandwich = _this.delete_sandwich.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
@@ -63631,18 +63630,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "navbar-brand",
         to: "/"
-      }, "Je me mangerais bien un sushi ou un truc du genre... C'est l'heure du service ! "), sandwiches_list), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "command-page__add-sandwich"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        onSubmit: this.createSandwich
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Nom de sandwich : "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        id: "sandwich_name_input",
-        onChange: this.on_change_sandwich_name,
-        type: "text"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "submit",
-        value: "Ajouter un sandwich de l'ambiance"
-      })))));
+      }, "Je me mangerais bien un sushi ou un truc du genre... C'est l'heure du service ! "), sandwiches_list)));
     } //RELATED TO THE CLASS METHODS
 
   }, {
@@ -63661,26 +63649,6 @@ function (_React$Component) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/sandwiches').then(function (response) {
         _this3.setState({
           sandwiches: response.data
-        });
-      });
-    }
-  }, {
-    key: "createSandwich",
-    value: function createSandwich(event) {
-      var _this4 = this;
-
-      event.preventDefault();
-      var sandwich = {
-        name: this.state.sandwich_name
-      };
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/sandwiches', sandwich).then(function (response) {
-        // redirect to the homepage
-        _this4.fetch_sandwiches();
-
-        _this4.reset_text_field("sandwich_name_input");
-      }).catch(function (error) {
-        _this4.setState({
-          errors: error.response.data.errors
         });
       });
     }
@@ -63704,16 +63672,16 @@ function (_React$Component) {
   }, {
     key: "delete_sandwich",
     value: function delete_sandwich(sandwich_id) {
-      var _this5 = this;
+      var _this4 = this;
 
       var sandwich = {
         id: sandwich_id
       };
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/sandwiches/destroy', sandwich).then(function (response) {
         // redirect to the homepage
-        _this5.fetch_sandwiches();
+        _this4.fetch_sandwiches();
       }).catch(function (error) {
-        _this5.setState({
+        _this4.setState({
           errors: error.response.data.errors
         });
       });
@@ -63850,10 +63818,108 @@ var Header = function Header(props) {
 
 /***/ }),
 
-/***/ "./resources/js/components/Sandwich.js":
-/*!*********************************************!*\
-  !*** ./resources/js/components/Sandwich.js ***!
-  \*********************************************/
+/***/ "./resources/js/components/Sandwiches/Sandwich.js":
+/*!********************************************************!*\
+  !*** ./resources/js/components/Sandwiches/Sandwich.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _SandwichesList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SandwichesList */ "./resources/js/components/Sandwiches/SandwichesList.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+
+
+
+
+var Sandwich =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Sandwich, _React$Component);
+
+  function Sandwich() {
+    var _this;
+
+    _classCallCheck(this, Sandwich);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Sandwich).call(this));
+    _this.createSandwich = _this.createSandwich.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
+  }
+
+  _createClass(Sandwich, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sandwiches_container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "command-page__add-sandwich"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SandwichesList__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.createSandwich
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Nom de sandwich : "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "sandwich_name_input",
+        onChange: this.on_change_sandwich_name,
+        type: "text"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "submit",
+        value: "Ajouter un sandwich de l'ambiance"
+      }))));
+    }
+  }, {
+    key: "createSandwich",
+    value: function createSandwich(event) {
+      var _this2 = this;
+
+      event.preventDefault();
+      var sandwich = {
+        name: this.state.sandwich_name
+      };
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/sandwiches', sandwich).then(function (response) {
+        // redirect to the homepage
+        _this2.fetch_sandwiches();
+
+        _this2.reset_text_field("sandwich_name_input");
+      }).catch(function (error) {
+        _this2.setState({
+          errors: error.response.data.errors
+        });
+      });
+    }
+  }]);
+
+  return Sandwich;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Sandwich);
+
+/***/ }),
+
+/***/ "./resources/js/components/Sandwiches/SandwichesList.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/Sandwiches/SandwichesList.js ***!
+  \**************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -63863,22 +63929,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 
-var Sandwich = function Sandwich(props) {
+var SandwichesList = function SandwichesList(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "header__container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    onClick: function onClick() {
-      return props.switch_menu_item("commandes");
-    },
-    className: "navbar-brand headbar__menu-item",
-    to: "/"
-  }, "Commandes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "navbar-brand headbar__menu-item",
-    to: "/"
-  }, "Sandwiches"), "Esp\xE8ce de charlot va");
+    className: "sandwiches-list"
+  }, "This is the sandwich list.");
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Sandwich);
+/* harmony default export */ __webpack_exports__["default"] = (SandwichesList);
 
 /***/ }),
 

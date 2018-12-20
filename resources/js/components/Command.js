@@ -13,7 +13,6 @@ class CommandPage extends React.Component {
         }
 
         this.on_change_sandwich_name = this.on_change_sandwich_name.bind(this)
-        this.createSandwich = this.createSandwich.bind(this)
         this.get_sandwiches = this.get_sandwiches.bind(this)
         this.delete_sandwich = this.delete_sandwich.bind(this)
 
@@ -39,13 +38,6 @@ class CommandPage extends React.Component {
                         <Link className='navbar-brand' to='/'>Je me mangerais bien un sushi ou un truc du genre... C'est l'heure du service ! </Link>
                         {sandwiches_list}
                     </div>
-                    <div className="command-page__add-sandwich">
-                        <form onSubmit={this.createSandwich} >
-                            <label>Nom de sandwich : </label>
-                            <input id="sandwich_name_input" onChange={this.on_change_sandwich_name} type="text"></input>
-                            <input type = "submit" value = "Ajouter un sandwich de l'ambiance"/>
-                        </form>
-                    </div>
                 </div>
             </div>
         )
@@ -67,27 +59,6 @@ class CommandPage extends React.Component {
             })
         })
     }
-
-    createSandwich (event) {
-        event.preventDefault()
-
-        const sandwich = {
-            name: this.state.sandwich_name,
-        }
-
-        axios.post('/api/sandwiches', sandwich)
-            .then(response => {
-                // redirect to the homepage
-                this.fetch_sandwiches();
-                this.reset_text_field("sandwich_name_input");
-            })
-            .catch(error => {
-                this.setState({
-                    errors: error.response.data.errors
-                })
-            })
-    }
-
 
     get_sandwiches() {
 
