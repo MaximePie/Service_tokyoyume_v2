@@ -63576,6 +63576,8 @@ function (_React$Component) {
     };
     _this.on_change_sandwich_name = _this.on_change_sandwich_name.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.createSandwich = _this.createSandwich.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.get_sandwiches = _this.get_sandwiches.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.delete_sandwich = _this.delete_sandwich.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -63654,14 +63656,35 @@ function (_React$Component) {
     key: "get_sandwiches",
     value: function get_sandwiches() {
       var sandwiches_list = [];
+      var delete_sandwich = this.delete_sandwich;
       this.state.sandwiches.forEach(function (sandwich) {
         sandwiches_list.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "sandwich"
-        }, sandwich.name, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-          className: "glyphicon glyphicon-trash"
-        })));
+          className: "sandwich",
+          key: sandwich.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, sandwich.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          onClick: function onClick() {
+            return delete_sandwich(sandwich.id);
+          }
+        }, "Delete")));
       });
       return sandwiches_list;
+    }
+  }, {
+    key: "delete_sandwich",
+    value: function delete_sandwich(sandwich_id) {
+      var _this5 = this;
+
+      var sandwich = {
+        id: sandwich_id
+      };
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/sandwiches/destroy', sandwich).then(function (response) {
+        // redirect to the homepage
+        _this5.fetch_sandwiches();
+      }).catch(function (error) {
+        _this5.setState({
+          errors: error.response.data.errors
+        });
+      });
     }
   }]);
 

@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('sandwiches', 'SandwichController@index');
 Route::post('sandwiches', 'SandwichController@store');
+Route::post('sandwiches/destroy', 'SandwichController@destroy');
 
 
 Route::get('projects', 'ProjectController@index');

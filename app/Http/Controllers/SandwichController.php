@@ -44,7 +44,7 @@ class SandwichController extends Controller
             'name' => $validatedData['name'],
         ]);
 
-        return response()->json('Project created!');
+        return response()->json('Sandwich created!');
     }
 
     /**
@@ -87,8 +87,11 @@ class SandwichController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $sandwich = Sandwich::findOrFail($request->id);
+        $sandwich->delete();
+
+        return response()->json('Sandwich deleted !');
     }
 }

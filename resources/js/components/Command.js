@@ -14,6 +14,8 @@ class CommandPage extends React.Component {
 
         this.on_change_sandwich_name = this.on_change_sandwich_name.bind(this)
         this.createSandwich = this.createSandwich.bind(this)
+        this.get_sandwiches = this.get_sandwiches.bind(this)
+        this.delete_sandwich = this.delete_sandwich.bind(this)
 
     }
 
@@ -88,16 +90,34 @@ class CommandPage extends React.Component {
     get_sandwiches() {
 
         let sandwiches_list = [];
+        let delete_sandwich = this.delete_sandwich;
 
         this.state.sandwiches.forEach(function(sandwich){
             sandwiches_list.push(
-                <div className="sandwich">
-                    {sandwich.name}
-                    <i className="glyphicon glyphicon-trash"/>
+                <div className="sandwich" key={sandwich.id}>
+                    <h2>{sandwich.name}</h2>
+                    <span onClick={() => delete_sandwich(sandwich.id)}>Delete</span>
                 </div>
             );
         })
         return sandwiches_list;
+    }
+
+    delete_sandwich(sandwich_id) {
+
+        const sandwich = {
+            id: sandwich_id
+        }
+        axios.post('/api/sandwiches/destroy', sandwich)
+            .then(response => {
+                // redirect to the homepage
+                this.fetch_sandwiches();
+            })
+            .catch(error => {
+                this.setState({
+                    errors: error.response.data.errors
+                })
+            })
     }
 }
 
