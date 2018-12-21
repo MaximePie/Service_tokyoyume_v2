@@ -36,7 +36,30 @@ class CommandPage extends React.Component {
 
     add_sandwich_to_command (sandwich) {
         let command = this.state.command;
-        command.push(sandwich)
+
+        let article = {};
+
+        let is_already_in_cart = false;
+
+        command.forEach(function(article, index){
+            if(article.object.id === sandwich.id )
+            {
+                is_already_in_cart = true;
+                command[index].amount ++;
+                command[index].jsx_element = <div key={sandwich.id} className={"command-details__article"}>{command[index].amount}{sandwich.name}</div>
+
+            }
+        })
+
+        if(!is_already_in_cart) {
+            //New line
+            article.object = sandwich;
+            article.jsx_element = <div key={sandwich.id} className={"command-details__article"}>{sandwich.name}</div>
+            article.amount = 1;
+            command.push(article)
+        }
+
+
         this.setState({
             command
         })
@@ -44,8 +67,10 @@ class CommandPage extends React.Component {
 
     get_command_details() {
         let command = [];
-        this.state.command.forEach(function(article, index) {
-            command.push(<div key={article.id + ""+ index} className={"command-details__article"}>{article.name}</div>)
+        let current_command = this.state.command;
+        let article = {}
+        current_command.forEach(function(article, index) {
+            command.push(article.jsx_element)
         })
 
         return command;

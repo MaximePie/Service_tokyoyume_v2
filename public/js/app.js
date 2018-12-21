@@ -63628,7 +63628,30 @@ function (_React$Component) {
     key: "add_sandwich_to_command",
     value: function add_sandwich_to_command(sandwich) {
       var command = this.state.command;
-      command.push(sandwich);
+      var article = {};
+      var is_already_in_cart = false;
+      command.forEach(function (article, index) {
+        if (article.object.id === sandwich.id) {
+          is_already_in_cart = true;
+          command[index].amount++;
+          command[index].jsx_element = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            key: sandwich.id,
+            className: "command-details__article"
+          }, command[index].amount, sandwich.name);
+        }
+      });
+
+      if (!is_already_in_cart) {
+        //New line
+        article.object = sandwich;
+        article.jsx_element = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: sandwich.id,
+          className: "command-details__article"
+        }, sandwich.name);
+        article.amount = 1;
+        command.push(article);
+      }
+
       this.setState({
         command: command
       });
@@ -63637,11 +63660,10 @@ function (_React$Component) {
     key: "get_command_details",
     value: function get_command_details() {
       var command = [];
-      this.state.command.forEach(function (article, index) {
-        command.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          key: article.id + "" + index,
-          className: "command-details__article"
-        }, article.name));
+      var current_command = this.state.command;
+      var article = {};
+      current_command.forEach(function (article, index) {
+        command.push(article.jsx_element);
       });
       return command;
     }
