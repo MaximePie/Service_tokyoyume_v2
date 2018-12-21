@@ -51,7 +51,11 @@ class CommandPage extends React.Component {
             {
                 is_already_in_cart = true;
                 command[index].amount ++;
-                command[index].jsx_element = <div key={sandwich.id} className={"command-details__article"}>{command[index].amount}{sandwich.name}</div>
+                command[index].jsx_element =
+                    <div key={sandwich.id} className={"command-details__article"}>
+                        <strong>{command[index].amount}</strong>
+                        {sandwich.name}
+                    </div>
 
             }
         })
@@ -60,8 +64,12 @@ class CommandPage extends React.Component {
         if(!is_already_in_cart) {
             //New line
             article.object = sandwich;
-            article.jsx_element = <div key={sandwich.id} className={"command-details__article"}>{sandwich.name}</div>
             article.amount = 1;
+            article.jsx_element =
+                <div key={sandwich.id} className={"command-details__article"}>
+                    <strong>{article.amount}</strong>
+                    {sandwich.name}
+                </div>
             command.push(article)
         }
 
@@ -82,8 +90,11 @@ class CommandPage extends React.Component {
             if(article.object.id === sandwich.id )
             {
                 command[index].amount --;
-                command[index].jsx_element = <div key={sandwich.id} className={"command-details__article"}>{command[index].amount}{sandwich.name}</div>
-
+                article.jsx_element =
+                    <div key={sandwich.id} className={"command-details__article"}>
+                        <strong>{article.amount}</strong>
+                        {sandwich.name}
+                    </div>
                 if(command[index].amount === 0) {
                     is_removed_from_cart = index;
                 }

@@ -63640,18 +63640,18 @@ function (_React$Component) {
           command[index].jsx_element = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: sandwich.id,
             className: "command-details__article"
-          }, command[index].amount, sandwich.name);
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, command[index].amount), sandwich.name);
         }
       });
 
       if (!is_already_in_cart) {
         //New line
         article.object = sandwich;
+        article.amount = 1;
         article.jsx_element = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: sandwich.id,
           className: "command-details__article"
-        }, sandwich.name);
-        article.amount = 1;
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, article.amount), sandwich.name);
         command.push(article);
       }
 
