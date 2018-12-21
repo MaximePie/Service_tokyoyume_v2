@@ -9571,3 +9571,16 @@ a.text-dark:focus {
   justify-content: space-around;
 }
 
+.sandwich {
+  display: flex;
+  justify-content: space-between;
+  max-width: 28vw;
+}
+
+.sandwich .fa-trash-alt {
+  font-size: 2em;
+  color: #c5655a;
+  margin-left: 64px;
+  cursor: pointer;
+}
+

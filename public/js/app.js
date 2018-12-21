@@ -63600,7 +63600,9 @@ function (_React$Component) {
     _classCallCheck(this, CommandPage);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(CommandPage).call(this));
-    _this.state = {};
+    _this.state = {
+      command: []
+    };
     _this.add_sandwich_to_command = _this.add_sandwich_to_command.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
@@ -63608,6 +63610,7 @@ function (_React$Component) {
   _createClass(CommandPage, [{
     key: "render",
     value: function render() {
+      var command_details = this.get_command_details();
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "commands-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -63619,12 +63622,28 @@ function (_React$Component) {
         add_sandwich: this.add_sandwich_to_command
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "command-details-container"
-      }, "Salut, salut, c'est la commande !"));
+      }, command_details));
     }
   }, {
     key: "add_sandwich_to_command",
-    value: function add_sandwich_to_command() {
-      alert("Sandwich added");
+    value: function add_sandwich_to_command(sandwich) {
+      var command = this.state.command;
+      command.push(sandwich);
+      this.setState({
+        command: command
+      });
+    }
+  }, {
+    key: "get_command_details",
+    value: function get_command_details() {
+      var command = [];
+      this.state.command.forEach(function (article, index) {
+        command.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: article.id + "" + index,
+          className: "command-details__article"
+        }, article.name));
+      });
+      return command;
     }
   }]);
 
@@ -63964,7 +63983,9 @@ function (_React$Component) {
           onClick: function onClick() {
             return delete_sandwich(sandwich.id);
           }
-        }, "Delete")));
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+          className: "fas fa-trash-alt"
+        }))));
       });
       return sandwiches_list;
     } //Returns an array containing the sandwiches elements
@@ -63980,7 +64001,7 @@ function (_React$Component) {
           key: sandwich.id
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, sandwich.name), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
           onClick: function onClick() {
-            return add_sandwich_to_command(sandwich.id);
+            return add_sandwich_to_command(sandwich);
           }
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
           className: "fas fa-plus-square"
