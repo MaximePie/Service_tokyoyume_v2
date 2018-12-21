@@ -63575,13 +63575,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 
 
@@ -63599,30 +63599,14 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(CommandPage).call(this));
     _this.state = {
-      sandwiches: [],
       sandwich_name: ""
     };
-    _this.on_change_sandwich_name = _this.on_change_sandwich_name.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.get_sandwiches = _this.get_sandwiches.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.delete_sandwich = _this.delete_sandwich.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(CommandPage, [{
-    key: "componentWillMount",
-    value: function componentWillMount() {
-      var _this2 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/sandwiches').then(function (response) {
-        _this2.setState({
-          sandwiches: response.data
-        });
-      });
-    }
-  }, {
     key: "render",
     value: function render() {
-      var sandwiches_list = this.get_sandwiches();
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -63630,69 +63614,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "navbar-brand",
         to: "/"
-      }, "Je me mangerais bien un sushi ou un truc du genre... C'est l'heure du service ! "), sandwiches_list)));
-    } //RELATED TO THE CLASS METHODS
-
-  }, {
-    key: "on_change_sandwich_name",
-    value: function on_change_sandwich_name(event) {
-      var sandwich_name = event.target.value;
-      this.setState({
-        sandwich_name: sandwich_name
-      });
-    }
-  }, {
-    key: "fetch_sandwiches",
-    value: function fetch_sandwiches() {
-      var _this3 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/sandwiches').then(function (response) {
-        _this3.setState({
-          sandwiches: response.data
-        });
-      });
-    }
-  }, {
-    key: "get_sandwiches",
-    value: function get_sandwiches() {
-      var sandwiches_list = [];
-      var delete_sandwich = this.delete_sandwich;
-      this.state.sandwiches.forEach(function (sandwich) {
-        sandwiches_list.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "sandwich",
-          key: sandwich.id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, sandwich.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          onClick: function onClick() {
-            return delete_sandwich(sandwich.id);
-          }
-        }, "Delete")));
-      });
-      return sandwiches_list;
-    }
-  }, {
-    key: "delete_sandwich",
-    value: function delete_sandwich(sandwich_id) {
-      var _this4 = this;
-
-      var sandwich = {
-        id: sandwich_id
-      };
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/sandwiches/destroy', sandwich).then(function (response) {
-        // redirect to the homepage
-        _this4.fetch_sandwiches();
-      }).catch(function (error) {
-        _this4.setState({
-          errors: error.response.data.errors
-        });
-      });
-    } //Not related to class methods (no need to bind them)
-
-  }, {
-    key: "reset_text_field",
-    value: function reset_text_field(field_id) {
-      var field = document.getElementById(field_id);
-      field.value = "";
-      console.log(field.value);
+      }, "Je me mangerais bien un sushi ou un truc du genre... C'est l'heure du service ! "))));
     }
   }]);
 
@@ -63866,6 +63788,8 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Sandwich).call(this));
     _this.createSandwich = _this.createSandwich.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.on_change_sandwich_name = _this.on_change_sandwich_name.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.delete_sandwich = _this.delete_sandwich.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -63876,7 +63800,10 @@ function (_React$Component) {
         className: "sandwiches_container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "command-page__add-sandwich"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SandwichesList__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SandwichesList__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        ref: "SandwichesListRef",
+        delete_sandwich: this.delete_sandwich
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.createSandwich
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Nom de sandwich : "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "sandwich_name_input",
@@ -63896,16 +63823,41 @@ function (_React$Component) {
       var sandwich = {
         name: this.state.sandwich_name
       };
+      var fetch_sandwiches_function = this.refs.SandwichesListRef.fetch_sandwiches();
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/sandwiches', sandwich).then(function (response) {
-        // redirect to the homepage
-        _this2.fetch_sandwiches();
+        fetch_sandwiches_function();
 
         _this2.reset_text_field("sandwich_name_input");
       }).catch(function (error) {
-        _this2.setState({
-          errors: error.response.data.errors
-        });
+        console.log(error);
       });
+    }
+  }, {
+    key: "delete_sandwich",
+    value: function delete_sandwich(sandwich_id) {
+      var sandwich = {
+        id: sandwich_id
+      };
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/sandwiches/destroy', sandwich).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
+    key: "on_change_sandwich_name",
+    value: function on_change_sandwich_name(event) {
+      var sandwich_name = event.target.value;
+      this.setState({
+        sandwich_name: sandwich_name
+      });
+    } //RELATED TO THE CLASS METHODS
+    //Not related to class methods (no need to bind them)
+
+  }, {
+    key: "reset_text_field",
+    value: function reset_text_field(field_id) {
+      var field = document.getElementById(field_id);
+      field.value = "";
+      console.log(field.value);
     }
   }]);
 
@@ -63925,15 +63877,110 @@ function (_React$Component) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 
-var SandwichesList = function SandwichesList(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sandwiches-list"
-  }, "This is the sandwich list.");
-};
+
+var SandwichesList =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(SandwichesList, _React$Component);
+
+  function SandwichesList() {
+    var _this;
+
+    _classCallCheck(this, SandwichesList);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SandwichesList).call(this));
+    _this.state = {
+      sandwiches: []
+    };
+    _this.get_sandwiches = _this.get_sandwiches.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.fetch_sandwiches = _this.fetch_sandwiches.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.delete_sandwich = _this.delete_sandwich.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
+  }
+
+  _createClass(SandwichesList, [{
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      this.fetch_sandwiches();
+    }
+  }, {
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(nextProps, nextContext) {
+      alert("NextProps");
+      this.fetch_sandwiches();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var sandwiches_list = this.get_sandwiches();
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "sandwiches-list"
+      }, sandwiches_list);
+    }
+  }, {
+    key: "get_sandwiches",
+    value: function get_sandwiches() {
+      var sandwiches_list = [];
+      var delete_sandwich = this.props.delete_sandwich;
+      this.state.sandwiches.forEach(function (sandwich) {
+        sandwiches_list.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "sandwich",
+          key: sandwich.id
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, sandwich.name), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          onClick: function onClick() {
+            return delete_sandwich(sandwich.id);
+          }
+        }, "Delete")));
+      });
+      return sandwiches_list;
+    }
+  }, {
+    key: "fetch_sandwiches",
+    value: function fetch_sandwiches() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/sandwiches').then(function (response) {
+        _this2.setState({
+          sandwiches: response.data
+        });
+      });
+    }
+  }, {
+    key: "delete_sandwich",
+    value: function delete_sandwich(id) {
+      var fetch_sandwiches = this.fetch_sandwiches;
+      this.props.delete_sandwich(id).then(function () {
+        fetch_sandwiches();
+      });
+    }
+  }]);
+
+  return SandwichesList;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
+
 
 /* harmony default export */ __webpack_exports__["default"] = (SandwichesList);
 

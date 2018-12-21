@@ -7,6 +7,8 @@ class Sandwich extends React.Component {
     constructor(){
         super();
         this.createSandwich = this.createSandwich.bind(this)
+        this.on_change_sandwich_name = this.on_change_sandwich_name.bind(this)
+        this.delete_sandwich = this.delete_sandwich.bind(this)
     }
 
 
@@ -14,10 +16,10 @@ class Sandwich extends React.Component {
         return (
             <div className='sandwiches_container'>
                 <div className="command-page__add-sandwich">
-                    <SandwichesList/>
+                    <SandwichesList ref="SandwichesListRef" delete_sandwich={this.delete_sandwich} />
                     <form onSubmit={this.createSandwich}>
                         <label>Nom de sandwich : </label>
-                        <input id="sandwich_name_input" onChange={this.on_change_sandwich_name} type="text"></input>
+                        <input id="sandwich_name_input" onChange={this.on_change_sandwich_name} type="text"/>
                         <input type="submit" value="Ajouter un sandwich de l'ambiance"/>
                     </form>
                 </div>
@@ -33,19 +35,50 @@ class Sandwich extends React.Component {
         const sandwich = {
             name: this.state.sandwich_name,
         }
+        let fetch_sandwiches_function = this.refs.SandwichesListRef.fetch_sandwiches();
 
         axios.post('/api/sandwiches', sandwich)
             .then(response => {
-                // redirect to the homepage
-                this.fetch_sandwiches();
+                fetch_sandwiches_function()
                 this.reset_text_field("sandwich_name_input");
             })
             .catch(error => {
-                this.setState({
-                    errors: error.response.data.errors
-                })
+                console.log(error)
             })
     }
+
+
+    delete_sandwich(sandwich_id) {
+
+        const sandwich = {
+            id: sandwich_id
+        }
+
+        axios.post('/api/sandwiches/destroy', sandwich)
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+    on_change_sandwich_name (event) {
+        let sandwich_name = event.target.value;
+        this.setState({
+            sandwich_name
+        })
+    }
+
+
+
+    //RELATED TO THE CLASS METHODS
+
+
+    //Not related to class methods (no need to bind them)
+    reset_text_field(field_id){
+        var field = document.getElementById(field_id);
+        field.value = "";
+        console.log(field.value);
+    }
+
 
 }
 
