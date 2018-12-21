@@ -6,6 +6,9 @@ class Sandwich extends React.Component {
 
     constructor(){
         super();
+
+        this.SandwichesListRef = React.createRef();
+
         this.createSandwich = this.createSandwich.bind(this)
         this.on_change_sandwich_name = this.on_change_sandwich_name.bind(this)
         this.delete_sandwich = this.delete_sandwich.bind(this)
@@ -16,7 +19,7 @@ class Sandwich extends React.Component {
         return (
             <div className='sandwiches_container'>
                 <div className="command-page__add-sandwich">
-                    <SandwichesList ref="SandwichesListRef" delete_sandwich={this.delete_sandwich} />
+                    <SandwichesList ref={this.SandwichesListRef} delete_sandwich={this.delete_sandwich} />
                     <form onSubmit={this.createSandwich}>
                         <label>Nom de sandwich : </label>
                         <input id="sandwich_name_input" onChange={this.on_change_sandwich_name} type="text"/>
@@ -35,7 +38,7 @@ class Sandwich extends React.Component {
         const sandwich = {
             name: this.state.sandwich_name,
         }
-        let fetch_sandwiches_function = this.refs.SandwichesListRef.fetch_sandwiches();
+        let fetch_sandwiches_function = this.SandwichesListRef.current.fetch_sandwiches;
 
         axios.post('/api/sandwiches', sandwich)
             .then(response => {
@@ -45,6 +48,8 @@ class Sandwich extends React.Component {
             .catch(error => {
                 console.log(error)
             })
+
+field
     }
 
 
@@ -54,7 +59,13 @@ class Sandwich extends React.Component {
             id: sandwich_id
         }
 
+        let fetch_sandwiches_function = this.SandwichesListRef.current.fetch_sandwiches;
+
+
         axios.post('/api/sandwiches/destroy', sandwich)
+            .then(response => {
+                fetch_sandwiches_function()
+            })
             .catch(error => {
                 console.log(error)
             })

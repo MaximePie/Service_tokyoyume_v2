@@ -63787,6 +63787,7 @@ function (_React$Component) {
     _classCallCheck(this, Sandwich);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Sandwich).call(this));
+    _this.SandwichesListRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     _this.createSandwich = _this.createSandwich.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.on_change_sandwich_name = _this.on_change_sandwich_name.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.delete_sandwich = _this.delete_sandwich.bind(_assertThisInitialized(_assertThisInitialized(_this)));
@@ -63801,7 +63802,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "command-page__add-sandwich"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SandwichesList__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        ref: "SandwichesListRef",
+        ref: this.SandwichesListRef,
         delete_sandwich: this.delete_sandwich
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.createSandwich
@@ -63823,7 +63824,7 @@ function (_React$Component) {
       var sandwich = {
         name: this.state.sandwich_name
       };
-      var fetch_sandwiches_function = this.refs.SandwichesListRef.fetch_sandwiches();
+      var fetch_sandwiches_function = this.SandwichesListRef.current.fetch_sandwiches;
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/sandwiches', sandwich).then(function (response) {
         fetch_sandwiches_function();
 
@@ -63831,6 +63832,7 @@ function (_React$Component) {
       }).catch(function (error) {
         console.log(error);
       });
+      field;
     }
   }, {
     key: "delete_sandwich",
@@ -63838,7 +63840,10 @@ function (_React$Component) {
       var sandwich = {
         id: sandwich_id
       };
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/sandwiches/destroy', sandwich).catch(function (error) {
+      var fetch_sandwiches_function = this.SandwichesListRef.current.fetch_sandwiches;
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/sandwiches/destroy', sandwich).then(function (response) {
+        fetch_sandwiches_function();
+      }).catch(function (error) {
         console.log(error);
       });
     }
@@ -63901,6 +63906,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 
 
+
 var SandwichesList =
 /*#__PURE__*/
 function (_React$Component) {
@@ -63924,12 +63930,6 @@ function (_React$Component) {
   _createClass(SandwichesList, [{
     key: "componentWillMount",
     value: function componentWillMount() {
-      this.fetch_sandwiches();
-    }
-  }, {
-    key: "componentWillReceiveProps",
-    value: function componentWillReceiveProps(nextProps, nextContext) {
-      alert("NextProps");
       this.fetch_sandwiches();
     }
   }, {
@@ -63980,7 +63980,6 @@ function (_React$Component) {
 
   return SandwichesList;
 }(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
-
 
 /* harmony default export */ __webpack_exports__["default"] = (SandwichesList);
 

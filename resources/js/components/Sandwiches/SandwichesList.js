@@ -1,4 +1,5 @@
 import axios from "axios";
+import React from 'react'
 
 class SandwichesList extends React.Component {
 
@@ -63,8 +64,6 @@ class SandwichesList extends React.Component {
         })
     }
 }
-
-import React from 'react'
 
 
 export default SandwichesList
