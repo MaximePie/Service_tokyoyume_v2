@@ -63565,6 +63565,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Sandwiches_SandwichesList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Sandwiches/SandwichesList */ "./resources/js/components/Sandwiches/SandwichesList.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -63575,13 +63576,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 
 
 
@@ -63598,23 +63600,31 @@ function (_React$Component) {
     _classCallCheck(this, CommandPage);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(CommandPage).call(this));
-    _this.state = {
-      sandwich_name: ""
-    };
+    _this.state = {};
+    _this.add_sandwich_to_command = _this.add_sandwich_to_command.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(CommandPage, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container"
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "commands-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "articles-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "commands-page__sandwiches-list"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        className: "navbar-brand",
-        to: "/"
-      }, "Je me mangerais bien un sushi ou un truc du genre... C'est l'heure du service ! "))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Sandwiches_SandwichesList__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        edit_mode: false,
+        add_sandwich: this.add_sandwich_to_command
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "command-details-container"
+      }, "Salut, salut, c'est la commande !"));
+    }
+  }, {
+    key: "add_sandwich_to_command",
+    value: function add_sandwich_to_command() {
+      alert("Sandwich added");
     }
   }]);
 
@@ -63675,7 +63685,7 @@ function (_Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container"
+        className: "commands-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -63802,6 +63812,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "command-page__add-sandwich"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SandwichesList__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        edit_mode: true,
         ref: this.SandwichesListRef,
         delete_sandwich: this.delete_sandwich
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
@@ -63832,7 +63843,6 @@ function (_React$Component) {
       }).catch(function (error) {
         console.log(error);
       });
-      field;
     }
   }, {
     key: "delete_sandwich",
@@ -63921,7 +63931,7 @@ function (_React$Component) {
     _this.state = {
       sandwiches: []
     };
-    _this.get_sandwiches = _this.get_sandwiches.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.get_sandwiches_edit = _this.get_sandwiches_edit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.fetch_sandwiches = _this.fetch_sandwiches.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.delete_sandwich = _this.delete_sandwich.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
@@ -63935,14 +63945,15 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var sandwiches_list = this.get_sandwiches();
+      var sandwiches_list = this.props.edit_mode ? this.get_sandwiches_edit() : this.get_sandwiches_view();
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "sandwiches-list"
       }, sandwiches_list);
-    }
+    } //Returns an array containing the sandwiches elements
+
   }, {
-    key: "get_sandwiches",
-    value: function get_sandwiches() {
+    key: "get_sandwiches_edit",
+    value: function get_sandwiches_edit() {
       var sandwiches_list = [];
       var delete_sandwich = this.props.delete_sandwich;
       this.state.sandwiches.forEach(function (sandwich) {
@@ -63954,6 +63965,26 @@ function (_React$Component) {
             return delete_sandwich(sandwich.id);
           }
         }, "Delete")));
+      });
+      return sandwiches_list;
+    } //Returns an array containing the sandwiches elements
+
+  }, {
+    key: "get_sandwiches_view",
+    value: function get_sandwiches_view() {
+      var sandwiches_list = [];
+      var add_sandwich_to_command = this.props.add_sandwich;
+      this.state.sandwiches.forEach(function (sandwich) {
+        sandwiches_list.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "sandwich",
+          key: sandwich.id
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, sandwich.name), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          onClick: function onClick() {
+            return add_sandwich_to_command(sandwich.id);
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+          className: "fas fa-plus-square"
+        }))));
       });
       return sandwiches_list;
     }

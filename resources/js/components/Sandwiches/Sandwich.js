@@ -19,7 +19,7 @@ class Sandwich extends React.Component {
         return (
             <div className='sandwiches_container'>
                 <div className="command-page__add-sandwich">
-                    <SandwichesList ref={this.SandwichesListRef} delete_sandwich={this.delete_sandwich} />
+                    <SandwichesList edit_mode ref={this.SandwichesListRef} delete_sandwich={this.delete_sandwich} />
                     <form onSubmit={this.createSandwich}>
                         <label>Nom de sandwich : </label>
                         <input id="sandwich_name_input" onChange={this.on_change_sandwich_name} type="text"/>

@@ -24,3 +24,38 @@
   /* min-height: 90vh; */
   height: 90vh;
 }
+
+
+.articles-container{
+  border: solid 1px #e6e6e6;
+  margin: 16px 0;
+  padding: 16px;
+  border-radius: 8px;
+
+  .sandwich {
+    display: flex;
+    justify-content: space-between;
+
+    .fa-plus-square {
+      font-size: 2em;
+      color: #72a972;
+      margin-left: 64px;
+      cursor:pointer;
+    }
+  }
+
+}
+
+.command-details-container {
+  border: solid 1px #e6e6e6;
+  margin: 16px 0;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+
+.commands-container {
+  display:flex;
+  justify-content: space-around;
+}
+

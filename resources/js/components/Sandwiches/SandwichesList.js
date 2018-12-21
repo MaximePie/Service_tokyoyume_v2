@@ -8,7 +8,7 @@ class SandwichesList extends React.Component {
         this.state = {
             sandwiches: [],
         }
-        this.get_sandwiches = this.get_sandwiches.bind(this)
+        this.get_sandwiches_edit = this.get_sandwiches_edit.bind(this)
         this.fetch_sandwiches = this.fetch_sandwiches.bind(this)
         this.delete_sandwich = this.delete_sandwich.bind(this)
 
@@ -20,7 +20,7 @@ class SandwichesList extends React.Component {
 
 
     render() {
-        let sandwiches_list = this.get_sandwiches();
+        let sandwiches_list = this.props.edit_mode ? this.get_sandwiches_edit() : this.get_sandwiches_view();
         return(
             <div className='sandwiches-list'>
                 {sandwiches_list}
@@ -30,7 +30,8 @@ class SandwichesList extends React.Component {
 
 
 
-    get_sandwiches() {
+    //Returns an array containing the sandwiches elements
+    get_sandwiches_edit() {
         let sandwiches_list = [];
         let delete_sandwich = this.props.delete_sandwich;
 
@@ -39,6 +40,24 @@ class SandwichesList extends React.Component {
                 <div className="sandwich" key={sandwich.id}>
                     <h2>{sandwich.name}</h2>
                     <span onClick={() => delete_sandwich(sandwich.id)}>Delete</span>
+                </div>
+            );
+        })
+        return sandwiches_list;
+    }
+
+    //Returns an array containing the sandwiches elements
+    get_sandwiches_view() {
+        let sandwiches_list = [];
+        let add_sandwich_to_command = this.props.add_sandwich;
+
+        this.state.sandwiches.forEach(function(sandwich){
+            sandwiches_list.push(
+                <div className="sandwich" key={sandwich.id}>
+                    <h2>{sandwich.name}</h2>
+                    <span onClick={() => add_sandwich_to_command(sandwich.id)}>
+                        <i className="fas fa-plus-square"></i>
+                    </span>
                 </div>
             );
         })
