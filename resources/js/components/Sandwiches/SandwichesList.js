@@ -58,12 +58,14 @@ class SandwichesList extends React.Component {
             sandwiches_list.push(
                 <div className="sandwich" key={sandwich.id}>
                     <h2>{sandwich.name}</h2>
-                    <span onClick={() => add_sandwich_to_command(sandwich)}>
-                        <i className="fas fa-plus-square"/>
-                    </span>
-                    <span onClick={() => delete_sandwich_from_command(sandwich)}>
-                        <i className="fas fa-minus-square"/>
-                    </span>
+                    <div className={"sandwich__actions"}>
+                        <span onClick={() => add_sandwich_to_command(sandwich)}>
+                            <i className="fas fa-plus-square"/>
+                        </span>
+                            <span onClick={() => delete_sandwich_from_command(sandwich)}>
+                            <i className="fas fa-minus-square"/>
+                        </span>
+                    </div>
                 </div>
             );
         })

@@ -63669,10 +63669,10 @@ function (_React$Component) {
       command.forEach(function (article, index) {
         if (article.object.id === sandwich.id) {
           command[index].amount--;
-          command[index].jsx_element = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          article.jsx_element = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: sandwich.id,
             className: "command-details__article"
-          }, command[index].amount, sandwich.name);
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, article.amount), sandwich.name);
 
           if (command[index].amount === 0) {
             is_removed_from_cart = index;
@@ -64053,7 +64053,9 @@ function (_React$Component) {
         sandwiches_list.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           className: "sandwich",
           key: sandwich.id
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, sandwich.name), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, sandwich.name), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "sandwich__actions"
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
           onClick: function onClick() {
             return add_sandwich_to_command(sandwich);
           }
@@ -64065,7 +64067,7 @@ function (_React$Component) {
           }
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
           className: "fas fa-minus-square"
-        }))));
+        })))));
       });
       return sandwiches_list;
     }
