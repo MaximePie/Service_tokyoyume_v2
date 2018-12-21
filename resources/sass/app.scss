@@ -36,12 +36,25 @@
     display: flex;
     justify-content: space-between;
 
-    .fa-plus-square {
-      font-size: 2em;
-      color: #72a972;
-      margin-left: 64px;
-      cursor:pointer;
+    &__actions{
+      margin-left: 32px;
+
+      .fas{
+        font-size: 2em;
+        margin-left: 8px;
+        cursor:pointer;
+      }
+
+      .fa-plus-square {
+        color: #72a972;
+      }
+
+      .fa-minus-square {
+        color: #c5655a;;
+      }
     }
+
+
   }
 
 }
