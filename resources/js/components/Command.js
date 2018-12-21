@@ -14,6 +14,7 @@ class CommandPage extends React.Component {
 
 
         this.add_sandwich_to_command = this.add_sandwich_to_command.bind(this);
+        this.delete_sandwich_from_command = this.delete_sandwich_from_command.bind(this);
     }
 
     render() {
@@ -24,7 +25,11 @@ class CommandPage extends React.Component {
             <div className='commands-container'>
                 <div className="articles-container">
                     <div className="commands-page__sandwiches-list">
-                        <SandwichesList edit_mode={false} add_sandwich={this.add_sandwich_to_command}/>
+                        <SandwichesList
+                            edit_mode={false}
+                            add_sandwich={this.add_sandwich_to_command}
+                            delete_sandwich={this.delete_sandwich_from_command}
+                        />
                     </div>
                 </div>
                 <div className="command-details-container">
@@ -36,11 +41,11 @@ class CommandPage extends React.Component {
 
     add_sandwich_to_command (sandwich) {
         let command = this.state.command;
-
         let article = {};
 
         let is_already_in_cart = false;
 
+        //Check if the sandwich is already in the list
         command.forEach(function(article, index){
             if(article.object.id === sandwich.id )
             {
@@ -50,6 +55,7 @@ class CommandPage extends React.Component {
 
             }
         })
+
 
         if(!is_already_in_cart) {
             //New line
@@ -65,11 +71,42 @@ class CommandPage extends React.Component {
         })
     }
 
+    delete_sandwich_from_command(sandwich) {
+        let command = this.state.command;
+        let article = {};
+
+        let is_removed_from_cart = -1;
+
+        //Check if the sandwich is already in the list
+        command.forEach(function(article, index){
+            if(article.object.id === sandwich.id )
+            {
+                command[index].amount --;
+                command[index].jsx_element = <div key={sandwich.id} className={"command-details__article"}>{command[index].amount}{sandwich.name}</div>
+
+                if(command[index].amount === 0) {
+                    is_removed_from_cart = index;
+                }
+
+            }
+        })
+
+
+        if(is_removed_from_cart > -1) {
+            command.splice(is_removed_from_cart)
+        }
+
+
+        this.setState({
+            command
+        })
+    }
+
+
     get_command_details() {
         let command = [];
         let current_command = this.state.command;
-        let article = {}
-        current_command.forEach(function(article, index) {
+        current_command.forEach(function(article) {
             command.push(article.jsx_element)
         })
 

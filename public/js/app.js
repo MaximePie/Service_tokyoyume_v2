@@ -63604,6 +63604,7 @@ function (_React$Component) {
       command: []
     };
     _this.add_sandwich_to_command = _this.add_sandwich_to_command.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.delete_sandwich_from_command = _this.delete_sandwich_from_command.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -63619,7 +63620,8 @@ function (_React$Component) {
         className: "commands-page__sandwiches-list"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Sandwiches_SandwichesList__WEBPACK_IMPORTED_MODULE_3__["default"], {
         edit_mode: false,
-        add_sandwich: this.add_sandwich_to_command
+        add_sandwich: this.add_sandwich_to_command,
+        delete_sandwich: this.delete_sandwich_from_command
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "command-details-container"
       }, command_details));
@@ -63629,7 +63631,8 @@ function (_React$Component) {
     value: function add_sandwich_to_command(sandwich) {
       var command = this.state.command;
       var article = {};
-      var is_already_in_cart = false;
+      var is_already_in_cart = false; //Check if the sandwich is already in the list
+
       command.forEach(function (article, index) {
         if (article.object.id === sandwich.id) {
           is_already_in_cart = true;
@@ -63657,12 +63660,40 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "delete_sandwich_from_command",
+    value: function delete_sandwich_from_command(sandwich) {
+      var command = this.state.command;
+      var article = {};
+      var is_removed_from_cart = -1; //Check if the sandwich is already in the list
+
+      command.forEach(function (article, index) {
+        if (article.object.id === sandwich.id) {
+          command[index].amount--;
+          command[index].jsx_element = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            key: sandwich.id,
+            className: "command-details__article"
+          }, command[index].amount, sandwich.name);
+
+          if (command[index].amount === 0) {
+            is_removed_from_cart = index;
+          }
+        }
+      });
+
+      if (is_removed_from_cart > -1) {
+        command.splice(is_removed_from_cart);
+      }
+
+      this.setState({
+        command: command
+      });
+    }
+  }, {
     key: "get_command_details",
     value: function get_command_details() {
       var command = [];
       var current_command = this.state.command;
-      var article = {};
-      current_command.forEach(function (article, index) {
+      current_command.forEach(function (article) {
         command.push(article.jsx_element);
       });
       return command;
@@ -64017,6 +64048,7 @@ function (_React$Component) {
     value: function get_sandwiches_view() {
       var sandwiches_list = [];
       var add_sandwich_to_command = this.props.add_sandwich;
+      var delete_sandwich_from_command = this.props.delete_sandwich;
       this.state.sandwiches.forEach(function (sandwich) {
         sandwiches_list.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           className: "sandwich",
@@ -64027,6 +64059,12 @@ function (_React$Component) {
           }
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
           className: "fas fa-plus-square"
+        })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          onClick: function onClick() {
+            return delete_sandwich_from_command(sandwich);
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+          className: "fas fa-minus-square"
         }))));
       });
       return sandwiches_list;
