@@ -15,6 +15,7 @@ class CommandPage extends React.Component {
 
         this.add_sandwich_to_command = this.add_sandwich_to_command.bind(this);
         this.delete_sandwich_from_command = this.delete_sandwich_from_command.bind(this);
+        this.validate_command = this.validate_command.bind(this);
     }
 
     render() {
@@ -34,9 +35,14 @@ class CommandPage extends React.Component {
                 </div>
                 <div className="command-details-container">
                     {command_details}
+                    <button onClick={this.validate_command} className="command-details__validate">Commander</button>
                 </div>
             </div>
         )
+    }
+
+    validate_command() {
+        alert("Work in progress on this feature");
     }
 
     add_sandwich_to_command (sandwich) {

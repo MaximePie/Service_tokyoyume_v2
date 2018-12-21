@@ -37,11 +37,14 @@ class SandwichController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required'
+            'name' => 'required',
+            'price' => 'required'
         ]);
 
         Sandwich::create([
             'name' => $validatedData['name'],
+            'price' => $validatedData['price'],
+
         ]);
 
         return response()->json('Sandwich created!');

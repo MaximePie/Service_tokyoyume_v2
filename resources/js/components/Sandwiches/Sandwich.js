@@ -11,6 +11,7 @@ class Sandwich extends React.Component {
 
         this.createSandwich = this.createSandwich.bind(this)
         this.on_change_sandwich_name = this.on_change_sandwich_name.bind(this)
+        this.on_change_sandwich_price = this.on_change_sandwich_price.bind(this)
         this.delete_sandwich = this.delete_sandwich.bind(this)
     }
 
@@ -23,7 +24,8 @@ class Sandwich extends React.Component {
                     <form onSubmit={this.createSandwich}>
                         <label>Nom de sandwich : </label>
                         <input id="sandwich_name_input" onChange={this.on_change_sandwich_name} type="text"/>
-                        <input type="submit" value="Ajouter un sandwich de l'ambiance"/>
+                        <input id="sandwich_price_input" onChange={this.on_change_sandwich_price}/>
+                        <input type="submit" value="Ajouter un sandwich"/>
                     </form>
                 </div>
             </div>
@@ -37,6 +39,7 @@ class Sandwich extends React.Component {
 
         const sandwich = {
             name: this.state.sandwich_name,
+            price: this.state.sandwich_price
         }
         let fetch_sandwiches_function = this.SandwichesListRef.current.fetch_sandwiches;
 
@@ -77,6 +80,12 @@ class Sandwich extends React.Component {
         })
     }
 
+    on_change_sandwich_price (event) {
+        let sandwich_price = event.target.value;
+        this.setState({
+            sandwich_price
+        })
+    }
 
 
     //RELATED TO THE CLASS METHODS

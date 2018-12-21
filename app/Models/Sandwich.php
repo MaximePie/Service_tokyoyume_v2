@@ -8,6 +8,6 @@ class Sandwich extends Model
 {
     //
     protected $fillable = [
-        'name',
+        'name', 'price'
     ];
 }

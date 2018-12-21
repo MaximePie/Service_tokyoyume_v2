@@ -63605,6 +63605,7 @@ function (_React$Component) {
     };
     _this.add_sandwich_to_command = _this.add_sandwich_to_command.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.delete_sandwich_from_command = _this.delete_sandwich_from_command.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.validate_command = _this.validate_command.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -63624,7 +63625,15 @@ function (_React$Component) {
         delete_sandwich: this.delete_sandwich_from_command
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "command-details-container"
-      }, command_details));
+      }, command_details, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.validate_command,
+        className: "command-details__validate"
+      }, "Commander")));
+    }
+  }, {
+    key: "validate_command",
+    value: function validate_command() {
+      alert("Work in progress on this feature");
     }
   }, {
     key: "add_sandwich_to_command",
@@ -63809,7 +63818,7 @@ var Header = function Header(props) {
     },
     className: "navbar-brand headbar__menu-item",
     to: "/"
-  }, "Commandes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, "Nouvelle commande"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     onClick: function onClick() {
       return props.switch_menu_item("sandwiches");
     },
@@ -63872,6 +63881,7 @@ function (_React$Component) {
     _this.SandwichesListRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     _this.createSandwich = _this.createSandwich.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.on_change_sandwich_name = _this.on_change_sandwich_name.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.on_change_sandwich_price = _this.on_change_sandwich_price.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.delete_sandwich = _this.delete_sandwich.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
@@ -63894,8 +63904,11 @@ function (_React$Component) {
         onChange: this.on_change_sandwich_name,
         type: "text"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "sandwich_price_input",
+        onChange: this.on_change_sandwich_price
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
-        value: "Ajouter un sandwich de l'ambiance"
+        value: "Ajouter un sandwich"
       }))));
     }
   }, {
@@ -63905,7 +63918,8 @@ function (_React$Component) {
 
       event.preventDefault();
       var sandwich = {
-        name: this.state.sandwich_name
+        name: this.state.sandwich_name,
+        price: this.state.sandwich_price
       };
       var fetch_sandwiches_function = this.SandwichesListRef.current.fetch_sandwiches;
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/sandwiches', sandwich).then(function (response) {
@@ -63935,6 +63949,14 @@ function (_React$Component) {
       var sandwich_name = event.target.value;
       this.setState({
         sandwich_name: sandwich_name
+      });
+    }
+  }, {
+    key: "on_change_sandwich_price",
+    value: function on_change_sandwich_price(event) {
+      var sandwich_price = event.target.value;
+      this.setState({
+        sandwich_price: sandwich_price
       });
     } //RELATED TO THE CLASS METHODS
     //Not related to class methods (no need to bind them)
@@ -64032,7 +64054,7 @@ function (_React$Component) {
         sandwiches_list.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           className: "sandwich",
           key: sandwich.id
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, sandwich.name), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, sandwich.name), sandwich.price, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
           onClick: function onClick() {
             return delete_sandwich(sandwich.id);
           }
@@ -64053,7 +64075,7 @@ function (_React$Component) {
         sandwiches_list.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           className: "sandwich",
           key: sandwich.id
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, sandwich.name), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, sandwich.name), sandwich.price, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           className: "sandwich__actions"
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
           onClick: function onClick() {

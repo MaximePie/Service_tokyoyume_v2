@@ -39,6 +39,7 @@ class SandwichesList extends React.Component {
             sandwiches_list.push(
                 <div className="sandwich" key={sandwich.id}>
                     <h2>{sandwich.name}</h2>
+                    {sandwich.price}
                     <span onClick={() => delete_sandwich(sandwich.id)}>
                         <i className="fas fa-trash-alt"></i>
                     </span>
@@ -58,6 +59,7 @@ class SandwichesList extends React.Component {
             sandwiches_list.push(
                 <div className="sandwich" key={sandwich.id}>
                     <h2>{sandwich.name}</h2>
+                    {sandwich.price}
                     <div className={"sandwich__actions"}>
                         <span onClick={() => add_sandwich_to_command(sandwich)}>
                             <i className="fas fa-plus-square"/>
