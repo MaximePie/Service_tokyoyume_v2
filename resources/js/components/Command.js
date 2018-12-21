@@ -9,18 +9,21 @@ class CommandPage extends React.Component {
     constructor(){
         super();
         this.state = {
-            command: []
+            command: [],
+            total_price: 0
         }
 
 
         this.add_sandwich_to_command = this.add_sandwich_to_command.bind(this);
         this.delete_sandwich_from_command = this.delete_sandwich_from_command.bind(this);
         this.validate_command = this.validate_command.bind(this);
+        this.get_total_price = this.get_total_price.bind(this);
     }
 
     render() {
 
         let command_details = this.get_command_details();
+        let total_price = this.get_total_price();
 
         return(
             <div className='commands-container'>
@@ -35,7 +38,7 @@ class CommandPage extends React.Component {
                 </div>
                 <div className="command-details-container">
                     {command_details}
-                    <button onClick={this.validate_command} className="command-details__validate">Commander</button>
+                    <button onClick={this.validate_command} className="command-details__validate">Commander ({total_price})</button>
                 </div>
             </div>
         )
@@ -128,6 +131,16 @@ class CommandPage extends React.Component {
         })
 
         return command;
+    }
+
+    get_total_price() {
+        let command = this.state.command;
+        let price = 0;
+        command.forEach(function(article) {
+            price += article.object.price * article.amount;
+        });
+
+        return price + "€";
     }
 }
 

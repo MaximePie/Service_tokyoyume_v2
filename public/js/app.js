@@ -63601,11 +63601,13 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(CommandPage).call(this));
     _this.state = {
-      command: []
+      command: [],
+      total_price: 0
     };
     _this.add_sandwich_to_command = _this.add_sandwich_to_command.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.delete_sandwich_from_command = _this.delete_sandwich_from_command.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.validate_command = _this.validate_command.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.get_total_price = _this.get_total_price.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -63613,6 +63615,7 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var command_details = this.get_command_details();
+      var total_price = this.get_total_price();
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "commands-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -63628,7 +63631,7 @@ function (_React$Component) {
       }, command_details, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.validate_command,
         className: "command-details__validate"
-      }, "Commander")));
+      }, "Commander (", total_price, ")")));
     }
   }, {
     key: "validate_command",
@@ -63706,6 +63709,16 @@ function (_React$Component) {
         command.push(article.jsx_element);
       });
       return command;
+    }
+  }, {
+    key: "get_total_price",
+    value: function get_total_price() {
+      var command = this.state.command;
+      var price = 0;
+      command.forEach(function (article) {
+        price += article.object.price * article.amount;
+      });
+      return price + "€";
     }
   }]);
 
@@ -63893,11 +63906,7 @@ function (_React$Component) {
         className: "sandwiches_container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "command-page__add-sandwich"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SandwichesList__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        edit_mode: true,
-        ref: this.SandwichesListRef,
-        delete_sandwich: this.delete_sandwich
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.createSandwich
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Nom de sandwich : "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "sandwich_name_input",
@@ -63909,7 +63918,11 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         value: "Ajouter un sandwich"
-      }))));
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SandwichesList__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        edit_mode: true,
+        ref: this.SandwichesListRef,
+        delete_sandwich: this.delete_sandwich
+      })));
     }
   }, {
     key: "createSandwich",
@@ -63925,7 +63938,9 @@ function (_React$Component) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/sandwiches', sandwich).then(function (response) {
         fetch_sandwiches_function();
 
-        _this2.reset_text_field("sandwich_name_input");
+        _this2.reset_field("sandwich_name_input");
+
+        _this2.reset_field("sandwich_price_input");
       }).catch(function (error) {
         console.log(error);
       });
@@ -63962,8 +63977,8 @@ function (_React$Component) {
     //Not related to class methods (no need to bind them)
 
   }, {
-    key: "reset_text_field",
-    value: function reset_text_field(field_id) {
+    key: "reset_field",
+    value: function reset_field(field_id) {
       var field = document.getElementById(field_id);
       field.value = "";
       console.log(field.value);
@@ -64054,7 +64069,7 @@ function (_React$Component) {
         sandwiches_list.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           className: "sandwich",
           key: sandwich.id
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, sandwich.name), sandwich.price, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, sandwich.name, sandwich.price), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
           onClick: function onClick() {
             return delete_sandwich(sandwich.id);
           }

@@ -20,13 +20,13 @@ class Sandwich extends React.Component {
         return (
             <div className='sandwiches_container'>
                 <div className="command-page__add-sandwich">
-                    <SandwichesList edit_mode ref={this.SandwichesListRef} delete_sandwich={this.delete_sandwich} />
                     <form onSubmit={this.createSandwich}>
                         <label>Nom de sandwich : </label>
                         <input id="sandwich_name_input" onChange={this.on_change_sandwich_name} type="text"/>
                         <input id="sandwich_price_input" onChange={this.on_change_sandwich_price}/>
                         <input type="submit" value="Ajouter un sandwich"/>
                     </form>
+                    <SandwichesList edit_mode ref={this.SandwichesListRef} delete_sandwich={this.delete_sandwich} />
                 </div>
             </div>
         )
@@ -46,7 +46,8 @@ class Sandwich extends React.Component {
         axios.post('/api/sandwiches', sandwich)
             .then(response => {
                 fetch_sandwiches_function()
-                this.reset_text_field("sandwich_name_input");
+                this.reset_field("sandwich_name_input");
+                this.reset_field("sandwich_price_input");
             })
             .catch(error => {
                 console.log(error)
@@ -92,7 +93,7 @@ class Sandwich extends React.Component {
 
 
     //Not related to class methods (no need to bind them)
-    reset_text_field(field_id){
+    reset_field(field_id){
         var field = document.getElementById(field_id);
         field.value = "";
         console.log(field.value);

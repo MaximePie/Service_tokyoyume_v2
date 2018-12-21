@@ -38,8 +38,10 @@ class SandwichesList extends React.Component {
         this.state.sandwiches.forEach(function(sandwich){
             sandwiches_list.push(
                 <div className="sandwich" key={sandwich.id}>
-                    <h2>{sandwich.name}</h2>
-                    {sandwich.price}
+                    <h2>
+                        {sandwich.name}
+                        {sandwich.price}
+                    </h2>
                     <span onClick={() => delete_sandwich(sandwich.id)}>
                         <i className="fas fa-trash-alt"></i>
                     </span>
