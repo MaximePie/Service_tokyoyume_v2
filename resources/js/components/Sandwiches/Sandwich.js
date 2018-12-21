@@ -49,7 +49,6 @@ class Sandwich extends React.Component {
                 console.log(error)
             })
 
-field
     }
 
 
