@@ -29,7 +29,6 @@ class SandwichesList extends React.Component {
     }
 
 
-
     //Returns an array containing the sandwiches elements
     get_sandwiches_edit() {
         let sandwiches_list = [];
@@ -60,8 +59,10 @@ class SandwichesList extends React.Component {
         this.state.sandwiches.forEach(function(sandwich){
             sandwiches_list.push(
                 <div className="sandwich" key={sandwich.id}>
-                    <h2>{sandwich.name}</h2>
-                    {sandwich.price}
+                    <h2>
+                        {sandwich.name}
+                        {sandwich.price}
+                    </h2>
                     <div className={"sandwich__actions"}>
                         <span onClick={() => add_sandwich_to_command(sandwich)}>
                             <i className="fas fa-plus-square"/>

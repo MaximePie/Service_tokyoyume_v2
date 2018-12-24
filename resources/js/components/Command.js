@@ -96,7 +96,7 @@ class CommandPage extends React.Component {
 
         //Check if the sandwich is already in the list
         command.forEach(function(article, index){
-            if(article.object.id === sandwich.id )
+            if(article.object.id === sandwich.id)
             {
                 command[index].amount --;
                 article.jsx_element =
@@ -113,7 +113,7 @@ class CommandPage extends React.Component {
 
 
         if(is_removed_from_cart > -1) {
-            command.splice(is_removed_from_cart)
+            command.splice(is_removed_from_cart,1)
         }
 
 
