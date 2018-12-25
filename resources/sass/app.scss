@@ -76,7 +76,12 @@
 .sandwich{
   display: flex;
   justify-content: space-between;
-  max-width: 28vw;
+
+  &__header{
+    &__price {
+      margin-left: 16px;
+    }
+  }
 
   .fa-trash-alt {
     font-size: 2em;

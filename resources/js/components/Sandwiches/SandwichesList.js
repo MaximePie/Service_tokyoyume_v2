@@ -60,8 +60,12 @@ class SandwichesList extends React.Component {
             sandwiches_list.push(
                 <div className="sandwich" key={sandwich.id}>
                     <h2>
-                        {sandwich.name}
-                        {sandwich.price}
+                        <span className="sandwich__header__name">
+                            {sandwich.name}
+                        </span>
+                        <span className="sandwich__header__price">
+                            {sandwich.price} €
+                        </span>
                     </h2>
                     <div className={"sandwich__actions"}>
                         <span onClick={() => add_sandwich_to_command(sandwich)}>
