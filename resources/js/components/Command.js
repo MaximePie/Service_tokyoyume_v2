@@ -18,12 +18,15 @@ class CommandPage extends React.Component {
         this.delete_sandwich_from_command = this.delete_sandwich_from_command.bind(this);
         this.validate_command = this.validate_command.bind(this);
         this.get_total_price = this.get_total_price.bind(this);
+        this.is_command_empty = this.is_command_empty.bind(this);
     }
 
     render() {
 
         let command_details = this.get_command_details();
         let total_price = this.get_total_price();
+
+        let is_validate_button_disabled = this.is_command_empty();
 
         return(
             <div className='commands-container'>
@@ -38,13 +41,14 @@ class CommandPage extends React.Component {
                 </div>
                 <div className="command-details-container">
                     {command_details}
-                    <button onClick={this.validate_command} className="command-details__validate">Commander ({total_price})</button>
+                    <button disabled={is_validate_button_disabled} onClick={this.validate_command} className="command-details__validate">Commander ({total_price})</button>
                 </div>
             </div>
         )
     }
 
     validate_command() {
+        alert(this.state.command.length)
         alert("Work in progress on this feature");
     }
 
@@ -141,6 +145,10 @@ class CommandPage extends React.Component {
         });
 
         return price + "€";
+    }
+
+    is_command_empty() {
+        return this.state.command.length <= 0;
     }
 }
 
