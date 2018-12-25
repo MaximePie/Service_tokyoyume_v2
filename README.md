@@ -8,7 +8,7 @@
 - [x] Remove articles from cart 
 - [ ] Save Cart
 - [ ] Save a command 
-- [ ] Prevent from sending an empty command 
+- [ ] Prevent from sending an empty command - Back 
 - [ ] Display the commands list
 - [ ] Cancel an ongoing command 
 - [ ] Validate a command as served 
