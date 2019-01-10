@@ -19,6 +19,7 @@
 - [ ] Reset cart 
 - [ ] Team management 
 - [ ] Report bug 
+- [ ] Team roles tutorial
 
 
 
