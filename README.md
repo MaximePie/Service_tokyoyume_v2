@@ -6,6 +6,11 @@
 - [x] Calculate and display a total command price 
 - [x] Compose a command 
 - [x] Remove articles from cart 
+
+- [ ] Import Spreadsheet data 
+- [ ] Create a shopping list from the speadsheet
+- [ ] Create a shopping list depending on the stocks
+
 - [ ] Save Cart
 - [ ] Save a command 
 - [ ] Prevent from sending an empty command - Back 
