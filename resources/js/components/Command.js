@@ -48,8 +48,23 @@ class CommandPage extends React.Component {
     }
 
     validate_command() {
-        alert(this.state.command.length)
-        alert("Work in progress on this feature");
+        //alert("Work in progress on this feature");
+
+        const command = {
+            sandwich_id: this.state.command[0].object.id,
+            sandwich_price: this.state.total_price,
+        }
+
+        //let fetch_sandwiches_function = this.SandwichesListRef.current.fetch_sandwiches;
+
+
+        axios.post('/api/commands/new', command)
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     add_sandwich_to_command (sandwich) {

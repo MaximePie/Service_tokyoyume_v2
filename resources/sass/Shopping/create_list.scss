@@ -1,0 +1,24 @@
+.create-list {
+  &__drop-zone {
+    margin: 16px;
+    border: dashed;
+    width: 200px;
+    height: 200px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .shopping-list {
+    .command-header {
+      margin: 16px 0;
+      border-bottom: rgba(132, 184, 119, 0.54) 3px solid;
+    }
+    .command-line {
+      max-width: 70%;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+}

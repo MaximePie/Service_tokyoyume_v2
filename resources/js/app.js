@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Header from './components/Header'
 import CommandPage from './components/Command'
 import Sandwiches from './components/Sandwiches/Sandwich'
+import Create_list from './components/Shopping/Create_list'
 
 
 /**
@@ -34,7 +35,7 @@ class App extends Component {
         super();
         this.switch_menu_item = this.switch_menu_item.bind(this)
         this.state = {
-            next_component: <CommandPage/>
+            next_component: <Create_list/>
         }
     }
 
@@ -42,11 +43,14 @@ class App extends Component {
 
         let next_component = undefined;
 
-        if(next_menu == "commandes") {
+        if(next_menu === "commandes") {
             next_component = <CommandPage/>
         }
-        else if (next_menu == "sandwiches") {
+        else if (next_menu === "sandwiches") {
             next_component = <Sandwiches/>
+        }
+        else if (next_menu === "shopping") {
+            next_component = <Create_list/>
         }
 
         this.setState({

@@ -21,6 +21,8 @@ Route::get('sandwiches', 'SandwichController@index');
 Route::post('sandwiches', 'SandwichController@store');
 Route::post('sandwiches/destroy', 'SandwichController@destroy');
 
+Route::post('/commands/new', 'CommandController@store');
+
 
 Route::get('projects', 'ProjectController@index');
 Route::post('projects', 'ProjectController@store');
