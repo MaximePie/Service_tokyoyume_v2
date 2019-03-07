@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sandwich;
+use App\Ingredient;
 use Illuminate\Http\Request;
 
-class SandwichController extends Controller
+class IngredientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class SandwichController extends Controller
      */
     public function index()
     {
-        $sandwiches = Sandwich::all()->where('is_available');
-        return $sandwiches->toJson();
+        $ingredients = Ingredient::all();
+        return $ingredients->toJson();
     }
 
     /**
@@ -36,18 +36,7 @@ class SandwichController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'price' => 'required'
-        ]);
-
-        Sandwich::create([
-            'name' => $validatedData['name'],
-            'price' => $validatedData['price'],
-
-        ]);
-
-        return response()->json('Sandwich created!');
+        //
     }
 
     /**
@@ -90,11 +79,8 @@ class SandwichController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $sandwich = Sandwich::findOrFail($request->id);
-        $sandwich->delete();
-
-        return response()->json('Sandwich deleted !');
+        //
     }
 }

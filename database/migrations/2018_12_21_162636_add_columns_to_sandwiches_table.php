@@ -15,6 +15,7 @@ class AddColumnsToSandwichesTable extends Migration
     {
         Schema::table('sandwiches', function (Blueprint $table) {
             $table->float('price');
+            $table->boolean('is_available');
         });
     }
 

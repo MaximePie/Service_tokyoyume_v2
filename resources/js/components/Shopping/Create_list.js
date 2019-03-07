@@ -45,10 +45,10 @@ export default function Create_list(){
         const result = await axios(
             '/api/sandwiches',
         );
-        const ingredients_list  = Object.values(result.data).map(function(ingredient) {
-            return ingredient.name
+        const sandwiches_list  = Object.values(result.data).map(function(sandwich) {
+            return sandwich.name
         })
-        set_base_recipes_elements(ingredients_list);
+        set_base_recipes_elements(sandwiches_list);
 
         return result;
     }
