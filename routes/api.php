@@ -21,8 +21,11 @@ Route::get('ingredients', 'IngredientController@index');
 Route::get('sandwiches', 'SandwichController@index');
 Route::post('sandwiches', 'SandwichController@store');
 Route::post('sandwiches/destroy', 'SandwichController@destroy');
+Route::post('commands', 'CommandeController@store');
+Route::get('sandwiches_ingredients', 'SandwichController@ingredients');
 
-Route::post('/commands/new', 'CommandController@store');
+Route::post('/commands/new', 'CommandeController@store');
+Route::post('commands_from_form', 'CommandeController@store_from_form');
 
 
 Route::get('projects', 'ProjectController@index');

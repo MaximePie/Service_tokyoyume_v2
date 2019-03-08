@@ -20,5 +20,16 @@
       display: grid;
       grid-template-columns: repeat(5, 1fr);
     }
+
+    .recipe-elements{
+      .ingredient {
+
+        font-size: 22px;
+
+        .ingredient-count{
+          margin-right: 8px;
+        }
+      }
+    }
   }
 }

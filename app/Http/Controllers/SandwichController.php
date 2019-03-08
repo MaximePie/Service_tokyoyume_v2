@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Ingredient;
+use App\Models\Commande;
 use App\Models\Sandwich;
 use Illuminate\Http\Request;
 
@@ -96,5 +98,23 @@ class SandwichController extends Controller
         $sandwich->delete();
 
         return response()->json('Sandwich deleted !');
+    }
+
+    public function ingredients() {
+        $sandwiches = Sandwich::all()->where('is_available');
+        $sandwiches_infos = array();
+
+        foreach($sandwiches as $sandwich) {
+            $sandwichIngredients = $sandwich->hasOne('App\Ingredient')->get(['name','quantity_per_sandwich']);
+            $sandwichCount = Commande::where('sandwich_id', $sandwich->id)->count();
+
+            $sandwich_info = new \stdClass();
+            $sandwich_info->count = $sandwichCount;
+            $sandwich_info->ingredients = $sandwichIngredients;
+
+            array_push($sandwiches_infos, $sandwich_info);
+        }
+
+        return response()->json($sandwiches_infos);
     }
 }

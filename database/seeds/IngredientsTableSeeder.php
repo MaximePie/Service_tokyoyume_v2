@@ -19,6 +19,7 @@ class IngredientsTableSeeder extends Seeder
             'unit_price' => 0.5,
             'stock'=> 0,
             'category'=>'ingredient',
+            'sandwich_id'=> 1,
             'is_critical'=> true
         ]);
         DB::table('ingredients')->insert([
@@ -27,6 +28,7 @@ class IngredientsTableSeeder extends Seeder
             'unit_price' => 0.5,
             'stock'=> 0,
             'category'=>'ingredient',
+            'sandwich_id'=> 1,
             'is_critical'=> true
         ]);
         DB::table('ingredients')->insert([
@@ -35,6 +37,7 @@ class IngredientsTableSeeder extends Seeder
             'unit_price' => 0.5,
             'stock'=> 0,
             'category'=>'sauce',
+            'sandwich_id'=> 1,
             'is_critical'=> true
         ]);
         DB::table('ingredients')->insert([
@@ -42,7 +45,8 @@ class IngredientsTableSeeder extends Seeder
             'quantity_per_sandwich'=> 1,
             'unit_price' => 0.5,
             'stock'=> 0,
-            'category'=>'Mayonnaise',
+            'category'=>'ingredient',
+            'sandwich_id'=> 3,
             'is_critical'=> true
         ]);
         DB::table('ingredients')->insert([
@@ -51,14 +55,16 @@ class IngredientsTableSeeder extends Seeder
             'unit_price' => 0.5,
             'stock'=> 0,
             'category'=>'ingredient',
+            'sandwich_id'=> 1,
             'is_critical'=> true
         ]);
         DB::table('ingredients')->insert([
             'name' => "Knacki",
-            'quantity_per_sandwich'=> 1,
+            'quantity_per_sandwich'=> 2,
             'unit_price' => 0.5,
             'stock'=> 0,
             'category'=>'ingredient',
+            'sandwich_id'=> 2,
             'is_critical'=> true
         ]);
         DB::table('ingredients')->insert([
@@ -67,6 +73,7 @@ class IngredientsTableSeeder extends Seeder
             'unit_price' => 0.5,
             'stock'=> 0,
             'category'=>'sauce',
+            'sandwich_id'=> 2,
             'is_critical'=> true
         ]);
         DB::table('ingredients')->insert([
@@ -75,6 +82,7 @@ class IngredientsTableSeeder extends Seeder
             'unit_price' => 0.5,
             'stock'=> 0,
             'category'=>'sauce',
+            'sandwich_id'=> 3,
             'is_critical'=> true
         ]);
 

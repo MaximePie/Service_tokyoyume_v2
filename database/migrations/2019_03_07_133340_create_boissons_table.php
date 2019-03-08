@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCommandsTable extends Migration
+class CreateBoissonsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateCommandsTable extends Migration
      */
     public function up()
     {
-        Schema::create('commands', function (Blueprint $table) {
+        Schema::create('boissons', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('sandwich_id')->unsigned();
+            $table->string('name');
+            $table->float('price');
+            $table->boolean('is_available');
             $table->timestamps();
-            $table->foreign('sandwich_id')->references('id')->on('sandwiches');
-
         });
     }
 
@@ -29,6 +29,6 @@ class CreateCommandsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('commands');
+        Schema::dropIfExists('boissons');
     }
 }

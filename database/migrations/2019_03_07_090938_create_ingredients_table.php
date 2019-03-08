@@ -21,7 +21,11 @@ class CreateIngredientsTable extends Migration
             $table->integer('stock');
             $table->boolean('is_critical');
             $table->string('category');
+            $table->integer('sandwich_id')->unsigned()->nullable();
             $table->timestamps();
+
+            $table->foreign('sandwich_id')->references('id')->on('sandwiches')->onDelete('cascade');
+
         });
     }
 
